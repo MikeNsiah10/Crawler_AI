@@ -6,11 +6,15 @@ from whoosh.fields import *
 from whoosh.qparser import QueryParser
 from urllib.parse import urljoin, urlparse
 
+
+#define a class crawler
 class Crawler:
     def __init__(self, starting_url):
+        #initialise the starting url
         self.starting_url = starting_url
         self.stack = [starting_url]
         self.visited = set()
+        #define the index shema
         self.schema = Schema(url=TEXT(stored=True), title=TEXT(stored=True), content=TEXT(stored=True))
         self.index_dir = "whoosh_index"
 
@@ -24,15 +28,19 @@ class Crawler:
         except:
             self.index = create_in(self.index_dir, self.schema)
 
+    #function to crawl the web page
     def crawl(self):
         while self.stack:
+            #remove the cuurent url
             url = self.stack.pop(0)
             if url not in self.visited:
+                #handle response errors
                 try:
                     response = requests.get(url, timeout=5)
                     print(f"Current URL: {url}")
-
+                    
                     if response.status_code == 200:
+                        #extract html content
                         soup = BeautifulSoup(response.content, 'html.parser')
                         title_text = soup.find('title').text if soup.title else "No title was found"
                         content = ' '.join(soup.stripped_strings)
@@ -41,7 +49,7 @@ class Crawler:
                             writer.add_document(url=url, title=title_text, content=content)
 
                         self.visited.add(url)
-
+                        #get allthe links and append them to the url
                         for link in soup.find_all('a', href=True):
                             absolute_url = urljoin(url, link['href'])
                             if urlparse(absolute_url).netloc == urlparse(self.starting_url).netloc:
@@ -53,8 +61,9 @@ class Crawler:
 
             print(f"Stack of websites left: {self.stack}")
             print(f"Crawled websites: {self.visited}")
-
+    #define a function to search the index
     def search(self, query):
+        #return the url,title,content
         with self.index.searcher() as searcher:
             query = QueryParser("content", self.index.schema).parse(query)
             results = [{'url': result['url'], 'title': result['title'], 'content': result['content']}
@@ -62,6 +71,7 @@ class Crawler:
             return results
 
 # Testing code
+#create an instance of the crawler class
 crawler = Crawler(starting_url='https://vm009.rz.uos.de/crawl/index.html')
 crawler.crawl()
 search_word = "plapytus"
