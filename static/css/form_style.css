@@ -12,7 +12,13 @@ body {
   align-items: center;
 }
 
-h1,
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 35px;
+}
+
+
 h2 {
   color: #fff;
   text-align: center;
