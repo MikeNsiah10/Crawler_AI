@@ -1,7 +1,7 @@
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  background-image: url('/static/spider-web.jpg?v=4'); 
+  background-image: url("{{url_for('static',filename='spider_web.jpg')}}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
