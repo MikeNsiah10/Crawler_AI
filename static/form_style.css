@@ -1,7 +1,7 @@
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  background-image: url("{{url_for('static',filename='abstract-dark-blue-futuristic-digital-grid-background.jpg')}}");
+  background-image: url("/static/abstract-dark-blue-futuristic-digital-grid-background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
