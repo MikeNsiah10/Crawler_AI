@@ -1,25 +1,26 @@
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  background-image:url('static/image/bg.jpg');
-
+  background-image: url('static/image/bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; 
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-h1, h2 {
-  color: #fff; 
+h1,
+h2 {
+  color: #fff;
   text-align: center;
   font-size: 35px;
 }
 
-h1:hover, h2:hover {
+h1:hover,
+h2:hover {
   color: gray;
 }
 
@@ -32,13 +33,17 @@ h2 {
 form {
   margin-top: 20px;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 input[type="text"] {
   padding: 10px;
-  width: 80%; 
+  width: 85%;
   font-size: 16px;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
   border-radius: 8px;
 }
 
