@@ -77,7 +77,7 @@ class Crawler:
             #search and print matched terms
             for result in searcher.search(query,terms=True):
                 if result.has_matched_terms():
-                    print(results.matched_terms)
+                    print(results.matched_terms())
                     results.append([{'url': result['url'], 'title': result['title'], 'content': result['content'], 'score': result.score}])
             
     
